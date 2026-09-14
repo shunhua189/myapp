@@ -9,7 +9,11 @@
   body { margin: 0; font-family: sans-serif; overflow-x: hidden; background: #f0f4f8; }
   .app-page { display: none; min-height: 100vh; }
   .app-page.active { display: block; }
-  #page-nav { padding: 60px 20px; text-align: center; background: #f8fafc; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+  /* 导航页默认隐藏；只有带 active 时才显示。
+     原代码在这里写死 display:flex，优先级高于 .app-page 的 display:none，
+     导致点击按钮后导航页无法消失。 */
+  #page-nav { padding: 60px 20px; text-align: center; background: #f8fafc; min-height: 100vh; flex-direction: column; justify-content: center; align-items: center; }
+  #page-nav.active { display: flex; }
   #page-nav h1 { color: #263247; margin-bottom: 40px; font-size: 32px; letter-spacing: 2px; }
   .nav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; max-width: 800px; width: 100%; }
   .nav-btn { padding: 40px 20px; font-size: 24px; font-weight: bold; color: white; border: none; border-radius: 20px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
