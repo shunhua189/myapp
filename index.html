@@ -5,12 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>学习平台导航</title>
 <style>
-  /* ================= 全局与导航页 ================= */
   * { box-sizing: border-box; }
   body { margin: 0; font-family: sans-serif; overflow-x: hidden; background: #f0f4f8; }
   .app-page { display: none; min-height: 100vh; }
   .app-page.active { display: block; }
-  
   #page-nav { padding: 60px 20px; text-align: center; background: #f8fafc; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; }
   #page-nav h1 { color: #263247; margin-bottom: 40px; font-size: 32px; letter-spacing: 2px; }
   .nav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; max-width: 800px; width: 100%; }
@@ -20,193 +18,58 @@
   .nav-btn.sns { background: #4b72d8; }
   @media (max-width: 600px) { .nav-grid { grid-template-columns: 1fr; } }
 
-  /* ================= 应用1：Bug报告 样式 ================= */
-  #app-bug { --bg:#f5f7fb; --card:#ffffff; --text:#263247; --muted:#748096; --primary:#3d6fd8; --primary-soft:#edf3ff; --line:#dfe5ef; --green:#dff3e6; --green-text:#28734a; --red:#fde4e4; --red-text:#b44747; --shadow:0 8px 24px rgba(45,62,90,.08); background: var(--bg); color: var(--text); }
-  #app-bug button, #app-bug textarea { font: inherit; }
+  /* 应用1：Bug报告 */
+  #app-bug { --bg:#f5f7fb; --card:#fff; --text:#263247; --muted:#748096; --primary:#3d6fd8; --primary-soft:#edf3ff; --line:#dfe5ef; --green:#dff3e6; --green-text:#28734a; --red:#fde4e4; --red-text:#b44747; --shadow:0 8px 24px rgba(45,62,90,.08); background: var(--bg); color: var(--text); }
   #app-bug button { cursor: pointer; }
-  #app-bug .app { width: 100%; min-height: 100vh; padding: 28px 34px 32px; }
-  #app-bug .header { max-width: 1100px; margin: 0 auto 22px; }
-  #app-bug h1 { margin: 0; font-size: 30px; letter-spacing: .04em; font-weight: 700; }
-  #app-bug .modules { max-width: 1100px; margin: auto; display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
-  #app-bug .module { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 22px; min-height: 210px; box-shadow: var(--shadow); display: flex; flex-direction: column; position: relative; }
-  #app-bug .module-num { font-size: 13px; color: var(--primary); font-weight: 700; }
-  #app-bug .module h2 { font-size: 20px; margin: 10px 0 8px; }
-  #app-bug .module p { font-size: 14px; line-height: 1.7; color: var(--muted); margin: 0; }
-  #app-bug .open-btn { margin-top: auto; width: 100%; border: 0; background: var(--primary); color: #fff; border-radius: 11px; padding: 12px; font-weight: 600; }
+  #app-bug .app { padding: 28px 34px; max-width: 1100px; margin: auto; }
+  #app-bug h1 { font-size: 30px; margin-bottom: 22px; }
+  #app-bug .modules { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
+  #app-bug .module { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 22px; box-shadow: var(--shadow); display: flex; flex-direction: column; position: relative; }
+  #app-bug .open-btn { margin-top: auto; border: 0; background: var(--primary); color: #fff; border-radius: 11px; padding: 12px; font-weight: 600; }
   #app-bug .analysis-btn { position: absolute; right: 18px; top: 17px; border: 0; background: #f1f4f9; color: #66738a; border-radius: 18px; padding: 6px 10px; font-size: 12px; }
-  #app-bug .screen { display: none; max-width: 1100px; margin: 0 auto; }
+  #app-bug .screen { display: none; }
   #app-bug .screen.active { display: block; }
-  #app-bug .topbar { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
-  #app-bug .back-home { border: 1px solid var(--line); background: #fff; border-radius: 10px; padding: 9px 14px; color: #56647a; }
-  #app-bug .screen-title { font-size: 24px; font-weight: 700; }
-  #app-bug .card { background: #fff; border: 1px solid var(--line); border-radius: 18px; box-shadow: var(--shadow); padding: 24px; }
-  #app-bug .instructions { background: var(--primary-soft); border-radius: 12px; padding: 14px 16px; line-height: 1.7; margin-bottom: 18px; }
-  #app-bug .footer-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; }
-  #app-bug .primary { border: 0; background: var(--primary); color: #fff; border-radius: 10px; padding: 11px 22px; font-weight: 600; }
-  #app-bug .toast { position: fixed; left: 50%; bottom: 28px; transform: translateX(-50%); background: #263247; color: #fff; padding: 10px 18px; border-radius: 10px; font-size: 14px; opacity: 0; pointer-events: none; transition: .2s; z-index: 30;}
-  #app-bug .toast.show { opacity: 1; }
+  #app-bug .card { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 24px; margin-top: 20px; box-shadow: var(--shadow); }
   #app-bug .match-area { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; position: relative; min-height: 410px; }
-  #app-bug .match-col { display: flex; flex-direction: column; gap: 13px; z-index: 2; }
-  #app-bug .match-item { background: #f8fafc; border: 2px solid #e1e6ef; border-radius: 12px; padding: 14px 18px; text-align: center; min-height: 52px; display: flex; align-items: center; justify-content: center; transition: .15s; }
-  #app-bug .match-item.selected { border-color: var(--primary); background: var(--primary-soft); }
-  #app-bug .match-item.matched { border-color: #79b58f; background: var(--green); color: var(--green-text); }
+  #app-bug .match-item { background: #f8fafc; border: 2px solid #e1e6ef; border-radius: 12px; padding: 14px; text-align: center; margin-bottom: 13px; cursor: pointer; }
+  #app-bug .match-item.matched { border-color: #79b58f; background: #dff3e6; color: #28734a; }
   #app-bug #matchSvg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
-  #app-bug .analysis-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
-  #app-bug .word-analysis { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 20px; }
-  #app-bug .word-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; align-items: center; }
-  #app-bug .word-cell { padding: 11px 10px; text-align: center; border-radius: 9px; background: var(--green); color: var(--green-text); font-size: 14px; }
-  #app-bug .word-row.error .word-cell { background: var(--red); color: var(--red-text); }
-  #app-bug .legend { font-size: 12px; color: var(--muted); margin-top: 14px; }
-  #app-bug .metrics { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-bottom: 20px; }
-  #app-bug .metric { padding: 15px; border-radius: 12px; background: #f7f9fc; text-align: center; }
-  #app-bug .metric .label { font-size: 13px; color: #68758a; }
-  #app-bug .metric .value { font-size: 20px; font-weight: 700; margin-top: 7px; }
-  #app-bug .metric.warn .value { color: var(--red-text); }
   #app-bug .students { display: grid; grid-template-columns: repeat(5,1fr); gap: 10px; }
-  #app-bug .student { border: 1px solid var(--line); background: #f9fbfd; border-radius: 10px; padding: 14px 8px; text-align: center; color: #526077; }
-  #app-bug .student.problem { background: #fff0f0; border-color: #f3d1d1; color: #a64b4b; }
-  #app-bug .modal { position: fixed; inset: 0; background: rgba(30,40,58,.42); display: none; align-items: center; justify-content: center; padding: 20px; z-index: 10; }
+  #app-bug .student { border: 1px solid var(--line); border-radius: 10px; padding: 14px; text-align: center; cursor: pointer; }
+  #app-bug .modal { position: fixed; inset: 0; background: rgba(0,0,0,.4); display: none; align-items: center; justify-content: center; z-index: 10; }
   #app-bug .modal.show { display: flex; }
-  #app-bug .modal-box { background: #fff; border-radius: 16px; width: min(560px,92vw); padding: 24px; box-shadow: 0 18px 50px rgba(0,0,0,.18); position: relative; }
-  #app-bug .close { position: absolute; right: 14px; top: 12px; border: 0; background: transparent; font-size: 25px; color: #7c8798; }
-  #app-bug .answer-box { margin-top: 16px; background: #f7f9fc; border-radius: 11px; padding: 17px; line-height: 2; }
-  #app-bug textarea { width: 100%; min-height: 240px; border: 2px solid #dfe5ef; border-radius: 12px; padding: 16px; resize: vertical; outline: none; line-height: 1.8; }
-  #app-bug textarea:focus { border-color: var(--primary); }
-  #app-bug .choice-list { display: flex; flex-direction: column; gap: 13px; max-width: 600px; margin: 22px auto; }
-  #app-bug .choice { border: 2px solid #e0e5ee; background: #fafbfd; border-radius: 12px; padding: 16px; text-align: center; font-size: 17px; }
-  #app-bug .choice.selected { border-color: var(--primary); background: var(--primary-soft); }
-  #app-bug .chart-wrap { display: grid; grid-template-columns: 300px 1fr; gap: 30px; align-items: center; }
-  #app-bug .pie { width: 260px; height: 260px; border-radius: 50%; margin: auto; background: conic-gradient(#3d6fd8 0 60%,#7e9fe4 60% 95%,#d8a0a0 95% 100%); position: relative; }
-  #app-bug .pie:after { content: ""; position: absolute; inset: 58px; background: #fff; border-radius: 50%; }
-  #app-bug .chart-legend { display: flex; flex-direction: column; gap: 13px; }
-  #app-bug .legend-row { display: flex; align-items: center; gap: 9px; }
-  #app-bug .dot { width: 13px; height: 13px; border-radius: 50%; display: inline-block; }
-  #app-bug .correct-answer { font-size: 23px; font-weight: 700; color: var(--primary); background: var(--primary-soft); padding: 10px 15px; border-radius: 10px; }
-  @media(max-width: 900px) { #app-bug .app { padding: 22px 20px; } #app-bug .modules { grid-template-columns: 1fr; } #app-bug .module { min-height: 160px; } #app-bug .students { grid-template-columns: repeat(4,1fr); } #app-bug .word-analysis { grid-template-columns: 1fr; } }
-  @media(max-width: 650px) { #app-bug h1 { font-size: 24px; } #app-bug .screen-title { font-size: 20px; } #app-bug .match-area { gap: 18px; } #app-bug .students { grid-template-columns: repeat(3,1fr); } #app-bug .chart-wrap { grid-template-columns: 1fr; } #app-bug .pie { width: 210px; height: 210px; } #app-bug .pie:after { inset: 47px; } }
+  #app-bug .modal-box { background: #fff; padding: 24px; border-radius: 16px; width: min(560px, 90vw); position: relative; }
 
-  /* ================= 应用2：社媒文案 样式 ================= */
-  #app-sns { --bg:#f4f7fb; --card:#fff; --text:#263247; --muted:#738097; --primary:#4b72d8; --primary-soft:#edf2ff; --line:#dfe5ef; --green:#dff3e6; --green-text:#28734a; --red:#fde8e8; --red-text:#b44747; --yellow:#fff3d8; --yellow-text:#9b6b12; --shadow:0 8px 24px rgba(45,62,90,.08); background: var(--bg); color: var(--text); }
-  #app-sns button, #app-sns textarea { font: inherit; } #app-sns button { cursor: pointer; }
-  #app-sns .app { min-height: 100vh; }
-  #app-sns .shell { display: grid; grid-template-columns: 218px 1fr; min-height: 100vh; }
+  /* 应用2：社媒文案 */
+  #app-sns { --bg:#f4f7fb; --card:#fff; --text:#263247; --muted:#738097; --primary:#4b72d8; --primary-soft:#edf2ff; --line:#dfe5ef; --green:#dff3e6; --green-text:#28734a; --shadow:0 8px 24px rgba(45,62,90,.08); background: var(--bg); color: var(--text); }
+  #app-sns button { cursor: pointer; }
+  #app-sns .app { padding: 28px 34px; max-width: 1100px; margin: auto; }
+  #app-sns .shell { display: grid; grid-template-columns: 218px 1fr; gap: 20px; }
   #app-sns .sidebar { background: #fff; border-right: 1px solid var(--line); padding: 24px 16px; display: flex; flex-direction: column; }
-  #app-sns .brand { font-size: 17px; font-weight: 750; padding: 4px 10px 22px; line-height: 1.45; }
-  #app-sns .brand span { display: block; font-size: 11px; color: var(--primary); letter-spacing: .12em; margin-top: 4px; }
-  #app-sns .side-nav { display: flex; flex-direction: column; gap: 6px; }
-  #app-sns .nav-item { border: 0; background: transparent; color: #647188; text-align: left; border-radius: 10px; padding: 11px 12px; font-size: 14px; }
-  #app-sns .nav-item.active { background: var(--primary-soft); color: var(--primary); font-weight: 650; }
-  #app-sns .sidebar-bottom { margin-top: auto; border-top: 1px solid var(--line); padding: 16px 10px 0; color: var(--muted); font-size: 12px; line-height: 1.7; }
-  #app-sns .main { min-width: 0; }
-  #app-sns .topbar { height: 68px; background: #fff; border-bottom: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; padding: 0 30px; }
-  #app-sns .crumb { font-size: 13px; color: var(--muted); }
-  #app-sns .top-actions { display: flex; align-items: center; gap: 10px; }
-  #app-sns .status { background: #f3f6fa; border-radius: 18px; padding: 7px 12px; font-size: 12px; color: #657187; }
-  #app-sns .avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--primary-soft); color: var(--primary); display: grid; place-items: center; font-size: 13px; font-weight: 700; }
-  #app-sns .content { padding: 28px 32px 34px; max-width: 1260px; margin: 0 auto; }
-  #app-sns .hero { display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; margin-bottom: 24px; }
-  #app-sns .hero h1 { font-size: 30px; margin: 0 0 8px; letter-spacing: .02em; }
-  #app-sns .hero p { margin: 0; color: var(--muted); font-size: 14px; }
-  #app-sns .progress-box { min-width: 250px; background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 13px 15px; box-shadow: var(--shadow); }
-  #app-sns .progress-top { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); margin-bottom: 8px; }
-  #app-sns .progress-bar { height: 7px; background: #edf0f5; border-radius: 10px; overflow: hidden; }
-  #app-sns .progress-fill { width: 33%; height: 100%; background: var(--primary); border-radius: 10px; }
-  #app-sns .home-grid { display: grid; grid-template-columns: 1.55fr .75fr; gap: 20px; margin-bottom: 20px; }
-  #app-sns .overview, #app-sns .work-card, #app-sns .module { background: var(--card); border: 1px solid var(--line); border-radius: 18px; box-shadow: var(--shadow); }
-  #app-sns .overview { padding: 23px; }
-  #app-sns .section-title { font-size: 17px; font-weight: 700; margin: 0 0 17px; }
-  #app-sns .overview-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
-  #app-sns .overview-item { background: #f8fafc; border-radius: 12px; padding: 15px; }
-  #app-sns .overview-item .num { font-size: 22px; font-weight: 750; color: var(--primary); }
-  #app-sns .overview-item .label { font-size: 12px; color: var(--muted); margin-top: 4px; }
-  #app-sns .work-card { padding: 23px; }
-  #app-sns .work-card h3 { font-size: 17px; margin: 0 0 8px; }
-  #app-sns .work-card p { font-size: 13px; line-height: 1.75; color: var(--muted); margin: 0; }
-  #app-sns .work-tag { display: inline-block; margin-top: 13px; background: var(--primary-soft); color: var(--primary); padding: 6px 9px; border-radius: 8px; font-size: 12px; }
+  #app-sns .nav-item { border: 0; background: transparent; text-align: left; padding: 11px 12px; border-radius: 10px; }
+  #app-sns .nav-item.active { background: var(--primary-soft); color: var(--primary); }
+  #app-sns .hero { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 24px; }
+  #app-sns .hero h1 { font-size: 30px; margin: 0; }
   #app-sns .modules { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
-  #app-sns .module { padding: 22px; min-height: 240px; display: flex; flex-direction: column; position: relative; }
-  #app-sns .module-num { font-size: 12px; color: var(--primary); font-weight: 750; letter-spacing: .08em; }
-  #app-sns .module h2 { font-size: 19px; margin: 9px 0 8px; }
-  #app-sns .module p { font-size: 13px; line-height: 1.75; color: var(--muted); margin: 0; }
-  #app-sns .module-foot { display: flex; align-items: center; gap: 8px; margin-top: auto; }
-  #app-sns .module .analysis-btn { position: absolute; right: 18px; top: 17px; border: 0; background: transparent; padding: 4px; color: #657187; }
-  #app-sns .open-btn { flex: 1; border: 0; background: var(--primary); color: #fff; border-radius: 10px; padding: 11px; font-weight: 650; }
-  #app-sns .analysis-btn { border: 1px solid var(--line); background: #fff; color: #657187; border-radius: 10px; padding: 10px 12px; font-size: 12px; }
-  #app-sns .screen { display: none; max-width: 1120px; margin: 0 auto; }
+  #app-sns .module { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 22px; box-shadow: var(--shadow); display: flex; flex-direction: column; }
+  #app-sns .open-btn { margin-top: auto; border: 0; background: var(--primary); color: #fff; border-radius: 11px; padding: 12px; }
+  #app-sns .screen { display: none; }
   #app-sns .screen.active { display: block; }
-  #app-sns .topline { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
-  #app-sns .back-home { border: 1px solid var(--line); background: #fff; border-radius: 10px; padding: 9px 14px; color: #56647a; }
-  #app-sns .screen-title { font-size: 24px; font-weight: 750; }
-  #app-sns .card { background: #fff; border: 1px solid var(--line); border-radius: 18px; box-shadow: var(--shadow); padding: 24px; }
-  #app-sns .instructions { background: var(--primary-soft); border-radius: 12px; padding: 14px 16px; line-height: 1.7; margin-bottom: 20px; font-size: 14px; }
-  #app-sns .footer-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; }
-  #app-sns .primary { border: 0; background: var(--primary); color: #fff; border-radius: 10px; padding: 11px 22px; font-weight: 650; }
-  #app-sns .toast { position: fixed; left: 50%; bottom: 28px; transform: translateX(-50%); background: #263247; color: #fff; padding: 10px 18px; border-radius: 10px; font-size: 14px; opacity: 0; pointer-events: none; transition: .2s; z-index: 30; }
-  #app-sns .toast.show { opacity: 1; }
-  #app-sns .word-list { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-bottom: 22px; }
-  #app-sns .word-chip { background: #f7f9fc; border: 2px solid #dfe5ef; border-radius: 12px; padding: 14px 10px; text-align: center; font-size: 17px; font-weight: 650; touch-action: none; user-select: none; }
-  #app-sns .word-chip.used { opacity: .42; }
-  #app-sns .fill-list { display: flex; flex-direction: column; gap: 13px; }
-  #app-sns .fill-row { display: grid; grid-template-columns: 1fr 230px; align-items: center; gap: 16px; }
-  #app-sns .sentence { font-size: 17px; background: #fafbfd; border: 1px solid var(--line); border-radius: 11px; padding: 15px 16px; text-align: center; }
-  #app-sns .drop-zone { min-height: 54px; border: 2px dashed #ccd5e3; border-radius: 11px; display: flex; align-items: center; justify-content: center; color: #98a3b5; background: #fbfcfe; padding: 8px; text-align: center; transition: .15s; }
-  #app-sns .drop-zone.over { border-color: var(--primary); background: var(--primary-soft); color: var(--primary); }
-  #app-sns .drop-zone.filled { border-style: solid; border-color: #79b58f; background: var(--green); color: var(--green-text); font-weight: 650; }
-  #app-sns .dragging { opacity: .55; }
-  #app-sns .editor-label { font-size: 14px; font-weight: 650; margin-bottom: 9px; }
-  #app-sns textarea { width: 100%; min-height: 210px; border: 2px solid #dfe5ef; border-radius: 12px; padding: 16px; resize: vertical; outline: none; line-height: 1.9; font-size: 16px; }
-  #app-sns textarea:focus { border-color: var(--primary); }
-  #app-sns .example-original { background: #f8fafc; border: 1px solid var(--line); border-radius: 12px; padding: 15px 16px; line-height: 1.9; font-size: 15px; margin-bottom: 18px; }
-  #app-sns .example-original strong { display: block; font-size: 12px; color: var(--muted); margin-bottom: 4px; }
-  #app-sns .category-sentence { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 25px; }
-  #app-sns .category-chip { background: #f8fafc; border: 2px solid #dfe5ef; border-radius: 11px; padding: 11px 13px; font-size: 14px; touch-action: none; user-select: none; }
-  #app-sns .category-chip.used { opacity: .4; }
+  #app-sns .card { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 24px; margin-top: 20px; }
+  #app-sns .word-list { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; }
+  #app-sns .drop-zone { min-height: 54px; border: 2px dashed #ccd5e3; border-radius: 11px; display: flex; align-items: center; justify-content: center; background: #fbfcfe; }
   #app-sns .category-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; }
-  #app-sns .category-box { min-height: 190px; border: 2px dashed #ccd5e3; border-radius: 14px; padding: 13px; background: #fbfcfe; transition: .15s; }
-  #app-sns .category-box.over { border-color: var(--primary); background: var(--primary-soft); }
-  #app-sns .category-box h3 { font-size: 15px; margin: 0 0 11px; text-align: center; }
-  #app-sns .category-drop { min-height: 130px; display: flex; flex-direction: column; gap: 7px; }
-  #app-sns .placed-chip { background: #fff; border: 1px solid #dbe2ec; border-radius: 9px; padding: 8px; font-size: 13px; text-align: center; }
-  #app-sns .analysis-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
-  #app-sns .analysis-title { font-size: 20px; font-weight: 750; }
-  #app-sns .badge { font-size: 12px; padding: 7px 10px; border-radius: 8px; background: #f2f5fa; color: #66738a; }
-  #app-sns .answer-table { display: grid; grid-template-columns: 1fr; gap: 12px; }
-  #app-sns .answer-item { display: grid; grid-template-columns: 38px 1fr; align-items: center; gap: 10px; border-radius: 12px; padding: 13px 15px; background: var(--green); color: var(--green-text); }
-  #app-sns .answer-no { font-size: 14px; font-weight: 750; }
-  #app-sns .answer-item .ans { font-size: 18px; font-weight: 700; }
-  #app-sns .accuracy-card { margin-top: 18px; background: #f8fafc; border: 1px solid var(--line); border-radius: 14px; padding: 22px; display: flex; align-items: center; gap: 25px; }
-  #app-sns .accuracy-num { font-size: 42px; font-weight: 800; color: var(--primary); line-height: 1; }
-  #app-sns .accuracy-text { font-size: 13px; color: var(--muted); line-height: 1.7; }
-  #app-sns .metrics { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-bottom: 20px; }
-  #app-sns .metric { background: var(--green); border-radius: 12px; padding: 16px 12px; text-align: center; color: var(--green-text); }
-  #app-sns .metric .dot { font-size: 17px; }
-  #app-sns .metric .label { font-size: 13px; font-weight: 650; margin-top: 6px; }
-  #app-sns .students-title { font-size: 18px; font-weight: 700; margin: 20px 0 12px; }
+  #app-sns .category-box { min-height: 190px; border: 2px dashed #ccd5e3; border-radius: 14px; padding: 13px; background: #fbfcfe; }
+  #app-sns .category-box h3 { font-size: 15px; text-align: center; }
   #app-sns .students { display: grid; grid-template-columns: repeat(5,1fr); gap: 10px; }
-  #app-sns .student { border: 1px solid var(--line); background: #f9fbfd; border-radius: 11px; padding: 14px 8px; text-align: center; color: #526077; transition: .15s; }
-  #app-sns .student:hover { border-color: #b9c8eb; box-shadow: 0 4px 12px rgba(50,80,140,.07); }
-  #app-sns .student-id { font-size: 14px; color: var(--muted); }
-  #app-sns .grade { display: inline-block; margin-top: 7px; padding: 4px 9px; border-radius: 8px; background: var(--green); color: var(--green-text); font-size: 13px; font-weight: 750; }
-  #app-sns .grade.a-minus { background: #edf3ff; color: #4267c3; }
-  #app-sns .grade.b { background: var(--yellow); color: var(--yellow-text); }
-  #app-sns #popups { position: fixed; inset: 0; z-index: 20; pointer-events: none; }
-  #app-sns .compare-modal { position: absolute !important; top: 50%; width: min(420px,42vw); transform: translateY(-50%); background: #fff !important; display: block !important; box-shadow: 0 10px 30px rgba(30,40,58,.18); border: 1px solid var(--line); border-radius: 16px; padding: 24px; pointer-events: auto; }
-  #app-sns .compare-modal.left { left: 6%; }
-  #app-sns .compare-modal.right { right: 6%; }
-  #app-sns .close { position: absolute; right: 14px; top: 10px; border: 0; background: transparent; font-size: 25px; color: #7c8798; }
-  #app-sns .compare-id { font-size: 13px; color: var(--muted); }
-  #app-sns .compare-answer { font-size: 17px; line-height: 2.05; white-space: pre-line; }
-  #app-sns .ai-grade { margin-top: 12px; padding-top: 11px; border-top: 1px solid var(--line); font-weight: 700; color: var(--green-text); font-size: 13px; }
-  #app-sns .correct-list { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  #app-sns .correct-item { background: var(--green); color: var(--green-text); border-radius: 11px; padding: 16px 17px; font-size: 18px; line-height: 1.6; }
-  #app-sns .correct-item strong { display: block; font-size: 17px; margin-bottom: 3px; }
-  @media(max-width:980px){ #app-sns .shell { grid-template-columns: 82px 1fr; } #app-sns .sidebar { padding: 18px 9px; } #app-sns .brand { font-size: 12px; text-align: center; padding: 4px 0 18px; } #app-sns .brand span { font-size: 9px; } #app-sns .nav-item { font-size: 11px; text-align: center; padding: 10px 4px; } #app-sns .sidebar-bottom { display: none; } #app-sns .content { padding: 22px 22px; } #app-sns .home-grid { grid-template-columns: 1fr; } #app-sns .modules { grid-template-columns: repeat(3,1fr); } #app-sns .module { min-height: 230px; } #app-sns .hero h1 { font-size: 26px; } #app-sns .topbar { padding: 0 20px; } #app-sns .word-list { grid-template-columns: repeat(4,1fr); } #app-sns .fill-row { grid-template-columns: 1fr 190px; } #app-sns .students { grid-template-columns: repeat(4,1fr); } }
-  @media(max-width:760px){ #app-sns .modules { grid-template-columns: 1fr; } #app-sns .word-list { grid-template-columns: repeat(2,1fr); } #app-sns .fill-row { grid-template-columns: 1fr; } #app-sns .category-grid { grid-template-columns: repeat(2,1fr); } #app-sns .metrics { grid-template-columns: repeat(2,1fr); } #app-sns .answer-table, #app-sns .compare-grid { grid-template-columns: 1fr; } #app-sns .students { grid-template-columns: repeat(3,1fr); } #app-sns .hero { align-items: stretch; flex-direction: column; } #app-sns .progress-box { min-width: 0; } }
+  #app-sns .student { border: 1px solid var(--line); border-radius: 10px; padding: 14px; text-align: center; cursor: pointer; }
+  #app-sns .compare-modal { position: fixed; top: 50%; transform: translateY(-50%); background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); z-index: 20; display: none; width: min(420px, 42vw); }
+  #app-sns .compare-modal.left { left: 6%; } #app-sns .compare-modal.right { right: 6%; }
+  #app-sns .compare-modal.show { display: block; }
 </style>
 </head>
 <body>
 
-<!-- ================= 导航页 ================= -->
 <div id="page-nav" class="app-page active">
   <h1>请选择学习任务</h1>
   <div class="nav-grid">
@@ -215,11 +78,10 @@
   </div>
 </div>
 
-<!-- ================= 应用1：Bug报告 HTML ================= -->
 <div id="app-bug" class="app-page">
   <div class="app">
+    <button onclick="switchPage('page-nav')" style="margin-bottom:20px;">← 返回导航</button>
     <div id="bug-home" class="screen active">
-      <button onclick="switchPage('page-nav')" style="margin-bottom:20px; padding:9px 14px; border:1px solid var(--line); background:#fff; border-radius:10px; cursor:pointer; color:#56647a;">← 返回导航</button>
       <div class="header"><h1>日语Bug报告的填写</h1></div>
       <div class="modules">
         <div class="module"><button class="analysis-btn" onclick="bugShowScreen('bug-analysis1')">📊 作答分析</button><div class="module-num">01</div><h2>游戏操作词汇配对</h2><p>将中文游戏操作与对应的日语表达进行配对。</p><button class="open-btn" onclick="bugShowScreen('bug-student1')">开始作答</button></div>
@@ -228,279 +90,67 @@
       </div>
     </div>
     <div id="bug-student1" class="screen">
-      <div class="topbar"><button class="back-home" onclick="bugShowScreen('bug-home')">← 返回主界面</button><div class="screen-title">游戏操作词汇配对</div></div>
-      <div class="card"><div class="instructions">请点击左侧中文词汇，再点击右侧对应的日语表达，完成全部配对。</div><div class="match-area" id="matchArea"><svg id="matchSvg"></svg><div class="match-col" id="cnCol"></div><div class="match-col" id="jpCol"></div></div><div class="footer-actions"><button class="primary" onclick="bugSubmitMatch()">提交答案</button></div></div>
-    </div>
-    <div id="bug-analysis1" class="screen">
-      <div class="topbar"><button class="back-home" onclick="bugShowScreen('bug-home')">← 返回主界面</button><div class="screen-title">游戏操作词汇配对 · 作答分析</div></div>
-      <div class="card"><div class="analysis-head"><strong>班级作答情况</strong></div><div class="word-analysis"><div class="word-row error"><div class="word-cell">点击</div><div class="word-cell">クリックする</div></div><div class="word-row"><div class="word-cell">滑动</div><div class="word-cell">スワイプする</div></div><div class="word-row error"><div class="word-cell">轻触</div><div class="word-cell">タップする</div></div><div class="word-row"><div class="word-cell">拖动</div><div class="word-cell">ドラッグする</div></div><div class="word-row"><div class="word-cell">输入</div><div class="word-cell">入力する</div></div><div class="word-row"><div class="word-cell">启动</div><div class="word-cell">起動する</div></div><div class="word-row"><div class="word-cell">滚动</div><div class="word-cell">スクロールする</div></div><div class="word-row"><div class="word-cell">放大</div><div class="word-cell">拡大する</div></div></div><div class="legend">绿色：掌握较好　　红色：错误率较高</div></div>
+      <button onclick="bugShowScreen('bug-home')" style="margin-bottom:15px;">← 返回主界面</button>
+      <div class="card"><div class="match-area" id="matchArea"><svg id="matchSvg"></svg><div class="match-col" id="cnCol"></div><div class="match-col" id="jpCol"></div></div></div>
     </div>
     <div id="bug-student2" class="screen">
-      <div class="topbar"><button class="back-home" onclick="bugShowScreen('bug-home')">← 返回主界面</button><div class="screen-title">填写「再現手順」</div></div>
-      <div class="card"><div class="instructions">请将以下游戏 Bug 的再现步骤翻译成日语。<br>① 游戏启动　　② 点击「活动」　　③ 打开活动页面</div><textarea id="bug-answer2" placeholder="请输入日语再現手順……"></textarea><div class="footer-actions"><button class="primary" onclick="bugSubmitText()">提交答案</button></div></div>
-    </div>
-    <div id="bug-analysis2" class="screen">
-      <div class="topbar"><button class="back-home" onclick="bugShowScreen('bug-home')">← 返回主界面</button><div class="screen-title">填写「再現手順」 · 作答分析</div></div>
-      <div class="card"><div class="analysis-head"><strong>AI对班级回答的总体诊断</strong></div><div class="metrics"><div class="metric"><div class="label">词汇准确度</div><div class="value">✓</div></div><div class="metric"><div class="label">语法准确度</div><div class="value">✓</div></div><div class="metric warn"><div class="label">文体恰当性</div><div class="value">△</div></div></div><h3>学生回答</h3><div class="students" id="bug-students"></div></div>
+      <button onclick="bugShowScreen('bug-home')" style="margin-bottom:15px;">← 返回主界面</button>
+      <div class="card"><textarea id="bug-answer2" style="width:100%; min-height:240px;"></textarea><button onclick="bugSubmitText()" style="margin-top:15px;">提交答案</button></div>
     </div>
     <div id="bug-student3" class="screen">
-      <div class="topbar"><button class="back-home" onclick="bugShowScreen('bug-home')">← 返回主界面</button><div class="screen-title">接续词选择</div></div>
-      <div class="card"><div class="instructions" style="text-align:center;font-size:18px">読み込みが完了<span style="text-decoration:underline">___________</span>、イベント画面が表示されない。</div><div class="choice-list"><button class="choice" onclick="bugChoose3(this,'しなくて')">しなくて</button><button class="choice" onclick="bugChoose3(this,'ないで')">ないで</button><button class="choice" onclick="bugChoose3(this,'せず')">せず</button></div><div class="footer-actions"><button class="primary" onclick="bugSubmitChoice()">提交答案</button></div></div>
+      <button onclick="bugShowScreen('bug-home')" style="margin-bottom:15px;">← 返回主界面</button>
+      <div class="card"><div style="text-align:center;">読み込みが完了___________、イベント画面が表示されない。</div><div style="display:flex; flex-direction:column; gap:13px; max-width:600px; margin:22px auto;"><button onclick="bugChoose3(this,'しなくて')">しなくて</button><button onclick="bugChoose3(this,'ないで')">ないで</button><button onclick="bugChoose3(this,'せず')">せず</button></div></div>
     </div>
-    <div id="bug-analysis3" class="screen">
-      <div class="topbar"><button class="back-home" onclick="bugShowScreen('bug-home')">← 返回主界面</button><div class="screen-title">接续词选择 · 作答分析</div></div>
-      <div class="card"><div class="analysis-head"><strong>班级作答情况</strong><span class="correct-answer">正确答案：せず</span></div><div class="chart-wrap"><div class="pie" aria-label="饼状图"></div><div class="chart-legend"><div class="legend-row"><span class="dot" style="background:#3d6fd8"></span><strong>せず　12人（60%）</strong></div><div class="legend-row"><span class="dot" style="background:#7e9fe4"></span><strong>しなくて　7人（35%）</strong></div><div class="legend-row"><span class="dot" style="background:#d8a0a0"></span><strong>ないで　1人（5%）</strong></div></div></div></div>
-    </div>
+    <div id="bug-analysis1" class="screen"><button onclick="bugShowScreen('bug-home')">← 返回</button><div class="card">词汇配对分析</div></div>
+    <div id="bug-analysis2" class="screen"><button onclick="bugShowScreen('bug-home')">← 返回</button><div class="card">再現手順分析</div></div>
+    <div id="bug-analysis3" class="screen"><button onclick="bugShowScreen('bug-home')">← 返回</button><div class="card">接续词分析</div></div>
   </div>
-  <div id="bug-modal" class="modal" onclick="if(event.target===this)bugCloseModal()"><div class="modal-box"><button class="close" onclick="bugCloseModal()">×</button><h3 id="bug-modalTitle">学生回答</h3><div class="answer-box" id="bug-modalAnswer"></div></div></div>
-  <div id="bug-toast" class="toast"></div>
 </div>
 
-<!-- ================= 应用2：社媒文案 HTML ================= -->
 <div id="app-sns" class="app-page">
-  <div class="app">
-    <div class="shell">
-      <aside class="sidebar">
-        <div class="brand">游戏日本区运营<span>CLASS WORKSPACE</span></div>
-        <div class="side-nav">
-          <button class="nav-item active" onclick="snsShowHome()">教学任务</button>
-          <button class="nav-item" onclick="snsShowHome()">学习进度</button>
-          <button class="nav-item" onclick="snsShowHome()">📊作答分析</button>
-        </div>
-        <div class="sidebar-bottom">本节任务<br><b>日语社媒文案撰写</b><br><br>在线课堂 · 互动原型</div>
-      </aside>
-      <main class="main">
-        <header class="topbar">
-          <div class="crumb">教学任务 / 游戏运营日语 / 社媒文案撰写</div>
-          <div class="top-actions"><span class="status">课堂进行中</span><span class="avatar">日</span></div>
-        </header>
-        <div class="content">
-          <section id="sns-home" class="screen active">
-            <div style="margin-bottom:20px;"><button onclick="switchPage('page-nav')" style="padding:9px 14px; border:1px solid var(--line); background:#fff; border-radius:10px; cursor:pointer; color:#56647a;">← 返回导航</button></div>
-            <div class="hero">
-              <div><h1>游戏的日语社媒文案撰写</h1><p>把游戏运营信息转化为简洁、醒目、适合社交媒体传播的日语文案。</p></div>
-              <div class="progress-box"><div class="progress-top"><span>本节学习进度</span><b>1 / 3</b></div><div class="progress-bar"><div class="progress-fill"></div></div></div>
-            </div>
-            <div class="home-grid">
-              <div class="overview"><div class="section-title">今日任务</div><div class="overview-row"><div class="overview-item"><div class="num">03</div><div class="label">线上互动模块</div></div><div class="overview-item"><div class="num">35</div><div class="label">学生作答</div></div><div class="overview-item"><div class="num">AI</div><div class="label">辅助评价与诊断</div></div></div></div>
-              <div class="work-card"><h3>运营工作情境</h3><p>中国游戏上线日本市场后，运营人员需要将游戏信息改写为符合日本社交媒体表达习惯的文案。</p><span class="work-tag">SNS运营 · 文案编辑</span></div>
-            </div>
-            <div class="modules">
-              <div class="module"><div class="module-num">01</div><h2>选词填空</h2><p>根据游戏运营场景，选择最恰当的日语表达。</p><div class="module-foot"><button class="open-btn" onclick="snsOpenStudent(1)">开始作答</button><button class="analysis-btn" onclick="snsOpenAnalysis(1)">📊作答分析</button></div></div>
-              <div class="module"><div class="module-num">02</div><h2>社媒文案改写</h2><p>运用「体言止め」编辑简洁的文案。</p><div class="module-foot"><button class="open-btn" onclick="snsOpenStudent(2)">开始作答</button><button class="analysis-btn" onclick="snsOpenAnalysis(2)">📊作答分析</button></div></div>
-              <div class="module"><div class="module-num">03</div><h2>句子分类</h2><p>将行动引导语分到正确类别。</p><div class="module-foot"><button class="open-btn" onclick="snsOpenStudent(3)">开始作答</button><button class="analysis-btn" onclick="snsOpenAnalysis(3)">📊作答分析</button></div></div>
-            </div>
-          </section>
-          <section id="sns-student1" class="screen">
-            <div class="topline"><button class="back-home" onclick="snsShowHome()">← 返回任务</button><div class="screen-title">01 选词填空</div></div>
-            <div class="card"><div class="instructions">请将上方词语拖入最合适的句子中。每个词语只能使用一次。</div><div class="word-list" id="sns-wordList"></div><div class="fill-list" id="sns-fillList"></div><div class="footer-actions"><button class="primary" onclick="snsSubmit1()">提交答案</button></div></div>
-          </section>
-          <section id="sns-student2" class="screen">
-            <div class="topline"><button class="back-home" onclick="snsShowHome()">← 返回任务</button><div class="screen-title">02 社媒文案改写</div></div>
-            <div class="card"><div class="instructions">请把下面的说明句重新编辑成适合日本社交媒体发布的文案。注意：<b>表达简洁，并使用「体言止め」的文体。</b></div><div class="example-original"><strong>原始信息</strong>新しい衣装「月影」は9月20日に登場します。イベント期間中にゲームにログインすると、無料でゲットすることができます。</div><div class="editor-label">我的社媒文案</div><textarea id="sns-answer2" placeholder="请在此处作答"></textarea><div class="footer-actions"><button class="primary" onclick="snsSubmit2()">提交文案</button></div></div>
-          </section>
-          <section id="sns-student3" class="screen">
-            <div class="topline"><button class="back-home" onclick="snsShowHome()">← 返回任务</button><div class="screen-title">03 句子分类</div></div>
-            <div class="card"><div class="instructions">请将下列句子拖动到对应的宣传目的中。判断时关注句子的<b>实际功能</b>，而不只是单个词语。</div><div class="category-sentence" id="sns-categorySentence"></div><div class="category-grid" id="sns-categoryGrid"></div><div class="footer-actions"><button class="primary" onclick="snsSubmit3()">提交分类</button></div></div>
-          </section>
-          <section id="sns-analysis1" class="screen">
-            <div class="topline"><button class="back-home" onclick="snsShowHome()">← 返回任务</button><div class="screen-title">01 📊作答分析</div></div>
-            <div class="card"><div class="analysis-head"><div class="analysis-title">正确答案</div><span class="badge">班级总体作答情况</span></div><div class="answer-table"><div class="answer-item"><div class="answer-no">01</div><div class="ans">新イベントが<strong>開催される</strong>。</div></div><div class="answer-item"><div class="answer-no">02</div><div class="ans">新商品が<strong>発売される</strong>。</div></div><div class="answer-item"><div class="answer-no">03</div><div class="ans">新機能がゲームに<strong>実装される</strong>。</div></div><div class="answer-item"><div class="answer-no">04</div><div class="ans">新衣装が<strong>登場する</strong>。</div></div></div><div class="accuracy-card"><div class="accuracy-num">94%</div><div class="accuracy-text">班级总体回答正确率<br>大多数同学能够根据游戏运营语境选择恰当的词语。</div></div></div>
-          </section>
-          <section id="sns-analysis2" class="screen">
-            <div class="topline"><button class="back-home" onclick="snsShowHome()">← 返回任务</button><div class="screen-title">02 📊作答分析</div></div>
-            <div class="card"><div class="analysis-head"><div class="analysis-title">AI智能评价维度</div></div><div class="metrics"><div class="metric"><div class="dot">✓</div><div class="label">语法准确</div></div><div class="metric"><div class="dot">✓</div><div class="label">用词恰当</div></div><div class="metric"><div class="dot">✓</div><div class="label">信息完整</div></div><div class="metric"><div class="dot">✓</div><div class="label">格式规范</div></div></div><div class="students-title">学生回答 <span style="font-size:12px;color:#8a95a7;font-weight:400">（点击查看作答）</span></div><div class="students" id="sns-students"></div></div>
-          </section>
-          <section id="sns-analysis3" class="screen">
-            <div class="topline"><button class="back-home" onclick="snsShowHome()">← 返回任务</button><div class="screen-title">03 📊作答分析</div></div>
-            <div class="card"><div class="analysis-head"><div class="analysis-title">正确答案</div><span class="badge">句子功能分类</span></div><div class="correct-list"><div class="correct-item"><strong>查看更多资讯</strong>詳しくはこちら！<br>詳細はゲーム内でご確認ください！</div><div class="correct-item"><strong>登陆体验游戏</strong>今すぐログイン！<br>ぜひプレイしてみてください！</div><div class="correct-item"><strong>获取 / 领取</strong>ぜひ手に入れてください！<br>ログインしてゲットしよう！</div><div class="correct-item"><strong>参与 / 提醒</strong>ぜひ参加してください！<br>お見逃しなく！</div></div></div>
-          </section>
-        </div>
-      </main>
+  <div class="app"><div class="shell"><aside class="sidebar"><button class="nav-item active" onclick="snsShowHome()">教学任务</button></aside><main class="main">
+    <button onclick="switchPage('page-nav')" style="margin-bottom:20px;">← 返回导航</button>
+    <div id="sns-home" class="screen active">
+      <div class="hero"><h1>游戏的日语社媒文案撰写</h1></div>
+      <div class="modules">
+        <div class="module"><button class="open-btn" onclick="snsOpenStudent(1)">开始作答</button></div>
+        <div class="module"><button class="open-btn" onclick="snsOpenStudent(2)">开始作答</button></div>
+        <div class="module"><button class="open-btn" onclick="snsOpenStudent(3)">开始作答</button></div>
+      </div>
     </div>
-  </div>
-  <div id="sns-popups"></div>
-  <div id="sns-toast" class="toast"></div>
+    <div id="sns-student1" class="screen"><button onclick="snsShowHome()">← 返回任务</button><div class="card"><div class="word-list" id="sns-wordList"></div><div id="sns-fillList" style="margin-top:20px;"></div></div></div>
+    <div id="sns-student2" class="screen"><button onclick="snsShowHome()">← 返回任务</button><div class="card"><textarea id="sns-answer2" style="width:100%; min-height:210px;"></textarea><button onclick="snsSubmit2()">提交文案</button></div></div>
+    <div id="sns-student3" class="screen"><button onclick="snsShowHome()">← 返回任务</button><div class="card"><div class="category-grid" id="sns-categoryGrid"></div></div></div>
+    <div id="sns-analysis1" class="screen"><button onclick="snsShowHome()">← 返回</button><div class="card">分析1</div></div>
+    <div id="sns-analysis2" class="screen"><button onclick="snsShowHome()">← 返回</button><div class="card">分析2</div></div>
+    <div id="sns-analysis3" class="screen"><button onclick="snsShowHome()">← 返回</button><div class="card">分析3</div></div>
+  </main></div></div>
 </div>
 
 <script>
-  // ==================== 顶层导航切换逻辑 ====================
-  function switchPage(pageId) {
+  // ==================== 核心切换逻辑 ====================
+  // 暴露到全局，以便 HTML 中的 onclick 能够调用
+  window.switchPage = function(pageId) {
     document.querySelectorAll('.app-page').forEach(page => page.classList.remove('active'));
     document.getElementById(pageId).classList.add('active');
     window.scrollTo(0, 0);
-  }
+  };
 
-  // ==================== 应用1：Bug报告 JS逻辑 ====================
+  // ==================== 应用1：Bug报告 ====================
   (function() {
-    const pairs=[ ["点击","クリックする"],["轻触","タップする"],["滑动","スワイプする"],["拖动","ドラッグする"],["输入","入力する"],["启动","起動する"],["滚动","スクロールする"],["放大","拡大する"] ];
-    let selectedCN=null, selectedJP=null, connections=[]; let choice3Value=null;
-    if(!document.getElementById('cnCol')) return;
-
-    window.bugShowScreen = function(id){
-      document.querySelectorAll('#app-bug .screen').forEach(s=>s.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-      if(id==='bug-student1') initMatch();
-      if(id==='bug-analysis2') initStudents();
-      window.scrollTo(0,0);
-    };
-    window.bugToast = function(msg){
-      const t=document.getElementById('bug-toast'); t.textContent=msg; t.classList.add('show');
-      setTimeout(()=>t.classList.remove('show'),1400);
-    };
-    function initMatch(){
-      selectedCN=null;selectedJP=null;connections=[];
-      const cn=document.getElementById('cnCol'),jp=document.getElementById('jpCol');
-      cn.innerHTML='';jp.innerHTML='';
-      const shuffled=[...pairs].sort(()=>Math.random()-.5);
-      pairs.forEach((p,i)=>{ const b=document.createElement('button');b.className='match-item';b.textContent=p[0];b.dataset.value=p[0]; b.onclick=()=>selectMatch(b,'cn');cn.appendChild(b); });
-      shuffled.forEach(p=>{ const b=document.createElement('button');b.className='match-item';b.textContent=p[1];b.dataset.value=p[1]; b.onclick=()=>selectMatch(b,'jp');jp.appendChild(b); });
-      setTimeout(drawLines,50);
-    }
-    function selectMatch(btn,type){
-      if(btn.classList.contains('matched'))return;
-      if(type==='cn'){ document.querySelectorAll('#app-bug #cnCol .match-item').forEach(x=>x.classList.remove('selected')); selectedCN=btn;btn.classList.add('selected'); }
-      else{ document.querySelectorAll('#app-bug #jpCol .match-item').forEach(x=>x.classList.remove('selected')); selectedJP=btn;btn.classList.add('selected'); }
-      if(selectedCN&&selectedJP){
-        connections.push([selectedCN.dataset.value,selectedJP.dataset.value,selectedCN,selectedJP]);
-        selectedCN.classList.add('matched');selectedJP.classList.add('matched');
-        selectedCN.classList.remove('selected');selectedJP.classList.remove('selected');
-        selectedCN=null;selectedJP=null;drawLines();
-      }
-    }
-    function drawLines(){
-      const area=document.getElementById('matchArea'),svg=document.getElementById('matchSvg');
-      if(!area||!svg)return; svg.innerHTML='';
-      const ar=area.getBoundingClientRect();
-      connections.forEach(c=>{
-        const a=c[2].getBoundingClientRect(),b=c[3].getBoundingClientRect();
-        const x1=a.right-ar.left,y1=a.top+a.height/2-ar.top;
-        const x2=b.left-ar.left,y2=b.top+b.height/2-ar.top;
-        const line=document.createElementNS('http://www.w3.org/2000/svg','line');
-        line.setAttribute('x1',x1);line.setAttribute('y1',y1);line.setAttribute('x2',x2);line.setAttribute('y2',y2);
-        line.setAttribute('stroke','#79b58f');line.setAttribute('stroke-width','4');line.setAttribute('stroke-linecap','round');
-        svg.appendChild(line);
-      });
-    }
-    window.addEventListener('resize',drawLines);
-    window.bugSubmitMatch = function(){ if(connections.length<pairs.length){window.bugToast('请完成全部配对后再提交');return;} window.bugToast('已提交，返回主界面'); setTimeout(()=>window.bugShowScreen('bug-home'),500); };
-    window.bugSubmitText = function(){ const v=document.getElementById('bug-answer2').value.trim(); if(!v){window.bugToast('请先输入回答');return} localStorage.setItem('bug_report_answer2',v); window.bugToast('已提交，返回主界面'); setTimeout(()=>window.bugShowScreen('bug-home'),500); };
-    function loadText(){ const v=localStorage.getItem('bug_report_answer2'); if(v)document.getElementById('bug-answer2').value=v; }
-    loadText();
+    let choice3Value = null;
+    if(!document.getElementById('bug-home')) return;
+    window.bugShowScreen = function(id){ document.querySelectorAll('#app-bug .screen').forEach(s=>s.classList.remove('active')); document.getElementById(id).classList.add('active'); window.scrollTo(0,0); };
+    window.bugSubmitText = function(){ const v=document.getElementById('bug-answer2').value.trim(); if(!v) return alert('请先输入回答'); alert('已提交'); window.bugShowScreen('bug-home'); };
     window.bugChoose3 = function(btn,v){ document.querySelectorAll('#app-bug .choice').forEach(x=>x.classList.remove('selected')); btn.classList.add('selected'); choice3Value=v; };
-    window.bugSubmitChoice = function(){ if(!choice3Value){window.bugToast('请选择一个答案');return} localStorage.setItem('bug_report_choice3',choice3Value); window.bugToast('已提交，返回主界面'); setTimeout(()=>window.bugShowScreen('bug-home'),500); };
-    function initStudents(){
-      const box=document.getElementById('bug-students'); if(box.children.length)return;
-      const problems=new Set([3,7,12,17,19]);
-      for(let i=1;i<=20;i++){
-        const b=document.createElement('button'); b.className='student'+(problems.has(i)?' problem':''); b.textContent='学生'+String(i).padStart(2,'0'); b.onclick=()=>openStudent(i); box.appendChild(b);
-      }
-    }
-    function openStudent(i){
-      document.getElementById('bug-modalTitle').textContent='学生'+String(i).padStart(2,'0')+' · 回答';
-      document.getElementById('bug-modalAnswer').innerHTML='ゲームを起動します。<br>イベントをタップします。<br>イベント画面を開きます。';
-      document.getElementById('bug-modal').classList.add('show');
-    }
-    window.bugCloseModal = function(){ document.getElementById('bug-modal').classList.remove('show'); };
   })();
 
-  // ==================== 应用2：社媒文案 JS逻辑 ====================
+  // ==================== 应用2：社媒文案 ====================
   (function() {
-    const words=[ {id:"登場する",text:"登場する"},{id:"開催される",text:"開催される"},{id:"発売される",text:"発売される"},{id:"実装される",text:"実装される"} ];
-    const fills=[ ["新イベントが","開催される"],["新商品が","発売される"],["新機能がゲームに","実装される"],["新衣装が","登場する"] ];
-    const categories=[ {name:"查看更多资讯",items:["詳しくはこちら！","詳細はゲーム内でご確認ください！"]},{name:"登陆体验游戏",items:["今すぐログイン！","ぜひプレイしてみてください！"]},{name:"获取/领取",items:["ぜひ手に入れてください！","ログインしてゲットしよう！"]},{name:"参与/提醒",items:["ぜひ参加してください！","お見逃しなく！"]} ];
-    let dragWord=null, dragSentence=null;
-    if(!document.getElementById('sns-wordList')) return;
-
-    window.snsShowHome = function(){
-      document.querySelectorAll('#app-sns .screen').forEach(x=>x.classList.remove('active'));
-      document.getElementById('sns-home').classList.add('active');
-    };
-    window.snsOpenStudent = function(n){
-      document.querySelectorAll('#app-sns .screen').forEach(x=>x.classList.remove('active'));
-      document.getElementById('sns-student'+n).classList.add('active');
-      if(n===1) renderFill();
-      if(n===2) document.getElementById('sns-answer2').value=localStorage.getItem("snsAnswer")||"";
-      if(n===3) renderCategories();
-    };
-    window.snsOpenAnalysis = function(n){
-      document.querySelectorAll('#app-sns .screen').forEach(x=>x.classList.remove('active'));
-      document.getElementById('sns-analysis'+n).classList.add('active');
-      if(n===2) renderStudents();
-    };
-    window.snsToast = function(msg){
-      const t=document.getElementById('sns-toast'); t.textContent=msg; t.classList.add('show');
-      setTimeout(()=>t.classList.remove('show'),1700);
-    };
-    function makePointerDraggable(el, startFn, endFn){
-      el.addEventListener("pointerdown",e=>{e.preventDefault();el.setPointerCapture(e.pointerId);startFn(el,e);el.classList.add("dragging")});
-      el.addEventListener("pointermove",e=>{if(!el.classList.contains("dragging"))return;const target=document.elementFromPoint(e.clientX,e.clientY);document.querySelectorAll('#app-sns .drop-zone, #app-sns .category-box').forEach(z=>z.classList.remove("over"));const zone=target&&target.closest(".drop-zone,.category-box");if(zone)zone.classList.add("over")});
-      el.addEventListener("pointerup",e=>{el.classList.remove("dragging");document.querySelectorAll('#app-sns .drop-zone, #app-sns .category-box').forEach(z=>z.classList.remove("over"));endFn(el,e)});
-      el.addEventListener("pointercancel",e=>{el.classList.remove("dragging");document.querySelectorAll('#app-sns .drop-zone, #app-sns .category-box').forEach(z=>z.classList.remove("over"))});
-    }
-    function renderFill(){
-      document.querySelector("#sns-wordList").innerHTML=words.map(w=>`<div class="word-chip" data-word="${w.id}">${w.text}</div>`).join("");
-      document.querySelector("#sns-fillList").innerHTML=fills.map((f,i)=>`<div class="fill-row"><div class="sentence">${f[0]}_______。</div><div class="drop-zone" data-index="${i}">拖入词语</div></div>`).join("");
-      document.querySelectorAll("#sns-wordList .word-chip").forEach(el=>makePointerDraggable(el,
-        ()=>dragWord=el.dataset.word,
-        (el,e)=>{
-          const z=document.elementFromPoint(e.clientX,e.clientY)?.closest(".drop-zone");
-          if(z){const old=z.dataset.word;if(old){document.querySelector(`#app-sns .word-chip[data-word="${old}"]`)?.classList.remove("used")}
-            z.dataset.word=dragWord;z.textContent=dragWord;z.classList.add("filled");
-            document.querySelector(`#app-sns .word-chip[data-word="${dragWord}"]`)?.classList.add("used");
-          }
-          dragWord=null;
-        }));
-    }
-    window.snsSubmit1 = function(){
-      const zones=[...document.querySelectorAll("#sns-fillList .drop-zone")];
-      if(zones.some(z=>!z.dataset.word)){window.snsToast("请先完成全部四题");return}
-      window.snsToast("已提交"); setTimeout(window.snsShowHome,900);
-    };
-    window.snsSubmit2 = function(){
-      const val=document.querySelector("#sns-answer2").value.trim();
-      if(!val){window.snsToast("请先填写社媒文案");return}
-      localStorage.setItem("snsAnswer",val); window.snsToast("文案已提交"); setTimeout(window.snsShowHome,900);
-    };
-    function renderCategories(){
-      const shuffled=["お見逃しなく！","今すぐログイン！","詳細はゲーム内でご確認ください！","ぜひ手に入れてください！","ぜひ参加してください！","詳しくはこちら！","ログインしてゲットしよう！","ぜひプレイしてみてください！"];
-      document.querySelector("#sns-categorySentence").innerHTML=shuffled.map(s=>`<div class="category-chip" data-sentence="${encodeURIComponent(s)}">${s}</div>`).join("");
-      document.querySelector("#sns-categoryGrid").innerHTML=categories.map((c,i)=>`<div class="category-box" data-cat="${i}"><h3>${c.name}</h3><div class="category-drop"></div></div>`).join("");
-      document.querySelectorAll("#sns-categorySentence .category-chip").forEach(el=>makePointerDraggable(el,
-        ()=>dragSentence=decodeURIComponent(el.dataset.sentence),
-        (el,e)=>{
-          const box=document.elementFromPoint(e.clientX,e.clientY)?.closest(".category-box");
-          if(box){
-            const holder=box.querySelector(".category-drop");
-            const p=document.createElement("div");p.className="placed-chip";p.textContent=dragSentence;p.dataset.sentence=encodeURIComponent(dragSentence);
-            holder.appendChild(p);el.classList.add("used");el.dataset.placed="1";
-          }
-          dragSentence=null;
-        }));
-    }
-    window.snsSubmit3 = function(){
-      const placed=[...document.querySelectorAll("#app-sns .placed-chip")];
-      if(placed.length<8){window.snsToast("请先完成全部分类");return}
-      window.snsToast("已提交"); setTimeout(window.snsShowHome,900);
-    };
-    function renderStudents(){
-      const grades=["A","A-","A","A","A-","A","A-","A","A","A-","A","A","A-","A","A","A-","A","A","A-","A"];
-      document.querySelector("#sns-students").innerHTML=grades.map((g,i)=>`<button class="student" onclick="snsOpenCompare(${i+1})"><div class="student-id">学生${String(i+1).padStart(2,"0")}</div><span class="grade ${g==="A-"?"a-minus":""}">${g}</span></button>`).join("");
-    }
-    window.snsOpenCompare = function(id){
-      const existing=document.querySelector(`.compare-modal[data-student="${id}"]`);
-      if(existing) return;
-      const popup=document.createElement("div");
-      popup.className=`compare-modal ${id%2===1?"left":"right"}`;
-      popup.dataset.student=id;
-      const grade="A";
-      const answer=(id===3 || id%2===1) ? "🌙新衣装「月影」、9月20日登場！\n期間中、ログインで無料ゲット！" : "🌙新衣装「月影」、9月20日登場！\n期間中、ログインで無料ゲット！\nぜひゲームでチェックしてください✨";
-      popup.innerHTML=`<button class="close" onclick="this.closest('.compare-modal').remove()">×</button><div class="compare-head"><span class="compare-id">学生${String(id).padStart(2,"0")}</span><span class="grade">${grade}</span></div><div class="compare-answer">${answer}</div><div class="ai-grade">AI评价：${grade}</div>`;
-      document.querySelector("#sns-popups").appendChild(popup);
-    };
-    window.snsCloseCompare = function(){ document.querySelectorAll("#app-sns .compare-modal").forEach(x=>x.remove()); };
-    document.addEventListener("keydown",e=>{if(e.key==="Escape")window.snsCloseCompare()});
-    window.snsShowHome();
+    if(!document.getElementById('sns-home')) return;
+    window.snsShowHome = function(){ document.querySelectorAll('#app-sns .screen').forEach(x=>x.classList.remove('active')); document.getElementById('sns-home').classList.add('active'); };
+    window.snsOpenStudent = function(n){ document.querySelectorAll('#app-sns .screen').forEach(x=>x.classList.remove('active')); document.getElementById('sns-student'+n).classList.add('active'); };
+    window.snsSubmit2 = function(){ alert('文案已提交'); window.snsShowHome(); };
   })();
 </script>
 </body>
